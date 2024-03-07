@@ -1,24 +1,32 @@
+# mcup2020 score
 
-> 在 [https://info-t126.github.io/mcup2020_score/](https://info-t126.github.io/mcup2020_score/) 打開此頁面
+## how to use
 
-## 作為擴充功能使用
-
-可以在 MakeCode 中將此儲存庫新增為**擴充功能**。
-
-* 開啟 [https://minecraft.makecode.com/](https://minecraft.makecode.com/)
-* 按一下**新專案**
-* 按一下工具齒輪選單下的**擴充功能**
-* 搜索 **https://github.com/info-t126/mcup2020_score** 並匯出
-
-## 編輯此專案
-
-編輯 MakeCode 中的儲存庫。
-
-* 開啟 [https://minecraft.makecode.com/](https://minecraft.makecode.com/)
-* 按一下**匯入**，然後按一下**匯入 URL**
-* 貼上 **https://github.com/info-t126/mcup2020_score** 並按一下匯入
-
-#### 中繼資料 (用於搜索、渲染)
-
-* for PXT/minecraft
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+```template
+let 結束時間 = 0
+let 開始時間 = 0
+player.onChat("run", function () {
+    開始時間 = gameplay.timeQuery(GAME_TIME)
+    gameplay.title(mobs.target(ALL_PLAYERS), "開始計算分數", "")
+    player.teleport(world(-80, 35, -10))
+    player.execute(
+    "tag @s add calcScore"
+    )
+})
+player.onTellCommand("end", function () {
+    gameplay.title(mobs.target(ALL_PLAYERS), "分數計算完畢", "")
+    結束時間 = gameplay.timeQuery(GAME_TIME)
+    player.say("執行時間：" + Math.trunc((結束時間 - 開始時間) / 1200) + "分" + Math.trunc((結束時間 - 開始時間) / 20 % 60) + "秒")
+})
+player.onChat("score", function (num1) {
+    if (num1 >= 1 && num1 <= 4) {
+        player.execute(
+        "scoreboard players set @s ShowData " + num1
+        )
+    } else {
+        player.execute(
+        "scoreboard players set @s ShowData 9"
+        )
+    }
+})
+```
