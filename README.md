@@ -1,5 +1,7 @@
 #mcup 2020 score
 
+##How to
+
 ```template
 let 結束時間 = 0
 let 開始時間 = 0
