@@ -1,6 +1,6 @@
 {
     "name": "mcup2020_score",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "dependencies": {
         "core": "*",
